@@ -9,4 +9,4 @@ Quick-and-Dirty tools to encrypt and decrypt files.
 
 #### Uninstall: `sudo make uninstall`
 
-#### Usage: `<encrypt|decrypt> <infile> <outfile>`
+#### Usage: `<encrypt|decrypt> <infile> [outfile]`
