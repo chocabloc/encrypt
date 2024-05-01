@@ -12,7 +12,7 @@ LDFLAGS = -flto -fopenmp -lm
 OUT = ./encrypt ./decrypt
 
 # Rules
-.phony = clean
+.phony = clean install uninstall
 
 all: $(OUT)
 
@@ -25,3 +25,10 @@ $(OBJ): %.o: %.c
 
 clean:
 	rm -f $(OBJ)
+
+install: $(OUT)
+	cp ./encrypt /usr/bin/encrypt
+	cp ./decrypt /usr/bin/decrypt
+
+uninstall:
+	rm -f /usr/bin/encrypt /usr/bin/decrypt

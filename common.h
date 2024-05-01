@@ -4,8 +4,8 @@
 
 #define unassert(cond, msg) do {                                        \
     if (!(cond)) break;                                                 \
-    fprintf(stderr, "\e[1;31merror:\e[0;37m %s \e[0;90m("               \
-    "%d@%s: %s)\e[0;37m\n", (msg), __LINE__, __FILE__, (#cond));        \
+    fprintf(stderr, "\e[1;31merror:\e[0m %s \e[0;90m("               \
+    "%d@%s: %s)\e[0m\n", (msg), __LINE__, __FILE__, (#cond));        \
     exit(-1);                                                           \
 } while(0);
 

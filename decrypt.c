@@ -33,7 +33,7 @@ int main(int argc, char** args) {
         sprintf(outname, "%s.decrypted", args[1]);
     }
     FILE* out = fopen(outname, "wb");
-    unassert(out == NULL, "couldn't create output file");
+    unassert(out == NULL, "couldn't create output file.");
 
     // decrypt the file
     while (!feof(file)) {
