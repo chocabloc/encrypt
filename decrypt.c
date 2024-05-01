@@ -44,7 +44,7 @@ int main(int argc, char** args) {
         pwdh = rng_get();
     }
 
-    printf("\x1b[A\rdone\n");
+    printf("\x1b[A\33[2K\rdone\n");
     fclose(out);
     fclose(file);
     return 0;
