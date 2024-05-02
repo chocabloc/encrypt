@@ -17,7 +17,7 @@ SRC = $(shell find . -name "*.c")
 OBJ = $(filter-out $(OUT_OBJ),$(SRC:.c=.o))
 
 # Rules
-.phony = all clean install uninstall
+.PHONY = all clean install uninstall
 
 all: $(OUT)
 
