@@ -1,7 +1,3 @@
-# Source and Object files
-SRC = decrypt.c encrypt.c rng.c sha-256.c
-OBJ = $(SRC:.c=.o)
-
 # Compiler options
 CC = gcc
 LD = gcc
@@ -9,26 +5,36 @@ CFLAGS = -std=gnu2x -Ofast -flto -fopenmp -march=native -Wall -Wno-missing-brace
 LDFLAGS = -flto -fopenmp -lm
 
 # Output binary
-OUT = ./encrypt ./decrypt
+OUT = encrypt decrypt
+OUT_OBJ = $(patsubst %,./%.o,$(OUT))
+
+# Installed binaries
+INSTDIR = /usr/bin/
+INST = $(patsubst %,$(INSTDIR)%,$(OUT))
+
+# Source and Object files
+SRC = $(shell find . -name "*.c")
+OBJ = $(filter-out $(OUT_OBJ),$(SRC:.c=.o))
 
 # Rules
-.phony = clean install uninstall
+.phony = all clean install uninstall
 
 all: $(OUT)
 
-$(OUT): $(OBJ)
-	$(LD) decrypt.o sha-256.o rng.o $(LDFLAGS) -o ./decrypt
-	$(LD) encrypt.o sha-256.o rng.o $(LDFLAGS) -o ./encrypt
+install: $(INST)
+
+uninstall:
+	rm -f $(INST)
+
+clean:
+	rm -f $(OBJ) $(OUT_OBJ)
+
+$(OUT): %: $(OBJ) %.o
+	$(LD) $^ $(LDFLAGS) -o $@
 
 $(OBJ): %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-clean:
-	rm -f $(OBJ)
+$(INST): $(INSTDIR)%: %
+	cp $^ $@
 
-install: $(OUT)
-	cp ./encrypt /usr/bin/encrypt
-	cp ./decrypt /usr/bin/decrypt
-
-uninstall:
-	rm -f /usr/bin/encrypt /usr/bin/decrypt

@@ -1,5 +1,5 @@
 > [!CAUTION]
-> These programs haven't been tested for their security. don't use them for security-sensitive purposes.
+> These programs haven't been tested for their security. Don't use them for security-sensitive purposes.
 
 Quick-and-Dirty tools to encrypt and decrypt files.
 
